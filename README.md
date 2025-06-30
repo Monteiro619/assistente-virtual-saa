@@ -1,144 +1,77 @@
-```
-# 🧠 Assistente Virtual da Subsecretaria de Assuntos Administrativos - SAA
+# 🤖 Assistente Virtual da Subsecretaria de Assuntos Administrativos – SAA
 
-Este projeto integra um agente inteligente do **Microsoft Copilot Studio** com uma interface Web contendo a **Carta de Serviços da SAA em PDF**. O chatbot responde exclusivamente com base nas informações oficiais fornecidas.
+Este projeto integra a **Carta de Serviços da SAA** em PDF com um **chatbot inteligente** criado no **Microsoft Copilot Studio** e publicado via **GitHub Pages**. O assistente responde **exclusivamente** com base no conteúdo oficial da carta.
 
 ---
 
-## ✅ ETAPA 1: Criar o Agente no Microsoft Copilot Studio
+## 🧠 ETAPA 1: Criar o Agente no Microsoft Copilot Studio
 
-### 1. Acesse o Copilot Studio
-- Vá para: [https://copilotstudio.microsoft.com](https://copilotstudio.microsoft.com)
+### 1. Acesse o Copilot Studio  
+- Visite: https://copilotstudio.microsoft.com  
 - Faça login com sua conta institucional (gov.br, saúde.gov.br ou Microsoft 365).
 
-### 2. Crie um novo bot
-- Vá em **Copilots** ou **Meus Agentes**
-- Clique em **Criar**
-- Defina um nome: `Assistente Virtual SAA`
-- Idioma: `Português (Brasil)`
-- Confirme
+### 2. Crie um novo bot  
+1. Clique em **Copilots** (ou **Meus Agentes**)  
+2. Clique em **Criar** (ou **Novo copiloto**)  
+3. Defina:  
+   - **Nome**: `Assistente Virtual SAA`  
+   - **Idioma**: Português (Brasil)  
+4. Confirme  
 
-### 3. Adicione a base de conhecimento
-- No menu lateral, vá para: **Base de conhecimento → Adicionar fonte**
-- Faça o upload do arquivo PDF da **Carta de Serviços**
-- Ou adicione um link público do PDF (por exemplo, do GitHub Pages ou SharePoint)
-- Isso permite que o agente responda com base nesse conteúdo
+### 3. Adicione a base de conhecimento  
+- No menu lateral, vá em **Base de conhecimento → Adicionar fonte**  
+- Faça **Upload** do PDF da Carta de Serviços **ou** cole o link público (SharePoint, GitHub Pages…)  
+- Isso garante que o agente use esse documento para fundamentar as respostas.
 
-### 4. Configure o comportamento da IA
-- Vá em **Configurações > IA generativa**
-- Adicione um comportamento personalizado com o seguinte conteúdo:
+### 4. Configure o comportamento da IA  
+- Vá em **Configurações > IA Generativa**  
+- Adicione este prompt como **comportamento personalizado**:
 
-```
+    ```text
+    Use exclusivamente as fontes de conhecimento fornecidas para responder às perguntas.
 
-Use exclusivamente as fontes de conhecimento fornecidas para responder às perguntas.
+    Sempre organize a resposta neste formato:
 
-Sempre organize a resposta neste formato:
+    Serviço:  
+    Macroprocesso:  
+    Unidade responsável:  
+    Contato:  
+    O que é?  
+    Quem pode solicitar?  
+    Como solicitar?  
+    Tempo médio de atendimento:
 
-Serviço:
-Macroprocesso:
-Unidade responsável:
-Contato:
-O que é?
-Quem pode solicitar?
-Como solicitar?
-Tempo médio de atendimento:
+    Se a informação solicitada não estiver disponível, responda:
+    “Desculpe, não encontrei essa informação na Carta de Serviços.”
 
-Se a informação solicitada não estiver disponível, responda:
-“Desculpe, não encontrei essa informação na Carta de Serviços.”
+    Evite qualquer conteúdo que não esteja presente nas fontes; não invente informações.
+    ```
 
-Evite qualquer conteúdo que não esteja presente nas fontes, não invente informações.
+### 5. Teste o agente  
+- Clique em **Testar seu copiloto** e faça algumas perguntas para validar o fluxo.
 
-```
+### 6. Publique o bot  
+- Vá em **Publicar > Publicar agora**
 
-### 5. Teste e publique o bot
-- Vá em **Testar seu copiloto** para validar as respostas
-- Depois, clique em **Publicar > Publicar agora**
+### 7. Obtenha o link do Webchat  
+1. Vá em **Canais > Aplicativo Web**  
+2. Ative o canal e copie o URL do iframe, por exemplo:
 
-### 6. Obtenha o link do Webchat
-- Vá em **Canais > Aplicativo Web**
-- Ative o canal e copie o link gerado. Ele terá a seguinte estrutura:
+    ```
+    https://copilotstudio.microsoft.com/environments/DEFAULT_ID/bots/BOT_ID/webchat?__version__=2
+    ```
 
-```
-
-[https://copilotstudio.microsoft.com/environments/SEU\_ID/bots/SEU\_ID/webchat?\_\_version\_\_=2](https://copilotstudio.microsoft.com/environments/SEU_ID/bots/SEU_ID/webchat?__version__=2)
-
-```
-
-Copie esse link para usar na interface da página.
+> ⚠️ Anote este link, você vai usá-lo em `index.html`.
 
 ---
 
 ## 🌐 ETAPA 2: Criar a Página Web no GitHub Pages
 
-### 1. Estrutura do repositório
+### 1. Crie o repositório no GitHub  
+- Acesse GitHub → **New Repository**  
+- Nome sugerido: `assistente-virtual-saa`  
+- Marque **Public** e **Add a README file**  
+- Clique em **Create repository**
 
-Crie um repositório no GitHub com o nome:
-
-```
-
-assistente-virtual-saa
-
-```
-
-Adicione os seguintes arquivos:
-
-```
-
-assistente-virtual-saa/
-├── index.html
-├── carta-servicos-saa.pdf.pdf
-└── README.md
-
-```
-
-### 2. Interface HTML
-
-O código que exibe o PDF e o botão flutuante do chatbot já está no arquivo `index.html`.
-
-Você só precisa:
-
-- Substituir o link do chatbot (`iframe src`) pelo link copiado do Copilot Studio.
-- Garantir que o nome do PDF (`carta-servicos-saa.pdf.pdf`) esteja idêntico ao nome no `src` do iframe.
-
-O layout foi construído com HTML, CSS e JavaScript puro e é responsivo.
-
-### 3. Publicar com GitHub Pages
-
-- Vá para o repositório no GitHub
-- Acesse **Settings > Pages**
-- Em **Build and Deployment**, selecione:
-  - **Branch**: `main` ou `principal`
-  - **Diretório**: `/ (root)`
-- Clique em **Salvar**
-
-O GitHub Pages irá gerar uma URL como esta:
-
-```
-
-[https://seuusuario.github.io/assistente-virtual-saa/](https://seuusuario.github.io/assistente-virtual-saa/)
-
-```
-
-Acesse o link para ver a página publicada.
-
----
-
-## ✅ Resultado Final
-
-🔹 A página exibe automaticamente o PDF da Carta de Serviços  
-🔹 Um botão no canto inferior direito permite abrir o chatbot  
-🔹 O chatbot responde apenas com base no conteúdo da Carta de Serviços
-
----
-
-## 📎 Observações
-
-- O chatbot **não interage diretamente com o PDF na página** – ele usa a **base carregada no Copilot Studio**.
-- O PDF na interface é apenas para visualização manual pelo usuário.
-- A interface está otimizada para funcionar bem em desktop e mobile.
-
----
-
-Desenvolvido para facilitar o acesso a serviços administrativos do Ministério da Saúde.
-```
-
+### 2. Prepare os arquivos locais  
+Na sua máquina, crie uma pasta `assistente-virtual-saa` com:  
