@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Assistente Virtual + PDF</title>
+  
+  <!-- CSS (style)-->
+  
+    <style>
+        html, body {
+        margin: 0;
+        padding: 0;
+        height: 100%;
+        font-family: 'Segoe UI', sans-serif;
+        background-color: #f8f9fa;
+        }
+
+        #pdf-frame {
+        width: 100%;
+        height: 100vh;
+        border: none;
+        }
+
+        #botao-chat {
+        position: fixed;
+        bottom: 20px;
+        right: 20px;
+        background-color: #0078D4;
+        color: white;
+        padding: 10px 18px;
+        border: none;
+        border-radius: 25px;
+        font-size: 14px;
+        cursor: pointer;
+        z-index: 10000;
+        box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+        }
+
+        #chatbox {
+        display: none;
+        position: fixed;
+        bottom: 80px;
+        right: 20px;
+        width: 390px;
+        height: 620px; 
+        background-color: white;
+        border-radius: 10px;
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+        overflow: hidden;
+        z-index: 9999;
+        border: 1px solid #ccc;
+        }
+
+        #chatbox-header {
+        background-color: #0b556a;
+        color: white;
+        padding: 12px 16px;
+        font-size: 15px;
+        font-weight: 500;
+        text-align: center;
+        position: relative;
+        }
+
+        #fechar-chat {
+        position: absolute;
+        right: 12px;
+        top: 8px;
+        background: transparent;
+        color: white;
+        border: none;
+        font-size: 20px;
+        cursor: pointer;
+        }
+
+        #chat-iframe {
+        width: 100%;
+        height: calc(100% - 52px); 
+        border: none;
+        }
+
+        @media (max-width: 480px) {
+        #chatbox {
+            width: 95%;
+            height: 88%;
+            right: 2.5%;
+        }
+
+        #botao-chat {
+            width: auto;
+            font-size: 13px;
+            padding: 8px 14px;
+        }
+
+        #chatbox-header {
+            font-size: 13px;
+            padding: 10px;
+        }
+
+        #fechar-chat {
+            top: 6px;
+            right: 10px;
+        }
+        }
+    </style>
+
+    </head>
+    <body>
+
+    <!-- PDF -->
+
+        <iframe
+            id="pdf-frame"
+            src="https://saudegov-my.sharepoint.com/:b:/g/personal/gabriel_ramos_saude_gov_br/EdZLQNil1p9IgSAOPk0U_pQB1ck9EFz5kjtkdC-OspdJSw?e=jkzTKx"
+            title="Carta de Serviços da Subsecretaria de Assuntos Administrativos – SAA">
+        </iframe>
+
+    <!-- Chatbox -->
+    
+        <div id="chatbox">
+            <div id="chatbox-header">
+        <!-- Nome: Assistente Virtual da Subsecretaria de Assuntos Administrativos - SAA (Se colocar o codigo sem ser anotação aparece como titulo)-->
+            <button id="fechar-chat" onclick="fecharChat()">×</button>
+            </div>
+            <iframe
+            id="chat-iframe"
+            src="https://copilotstudio.microsoft.com/environments/Default-9a554ad3-b52b-4862-a36f-84d891e5c705/bots/cr307_agente/webchat?__version__=2">
+            </iframe>
+        </div>
+
+    <!-- Botão -->
+        
+        <!-- JS (script)-->
+
+        <button id="botao-chat" onclick="abrirChat()">💬 Assistente Virtual</button>
+        <script>
+            function abrirChat() {
+            document.getElementById("chatbox").style.display = "block";
+            }
+
+            function fecharChat() {
+            document.getElementById("chatbox").style.display = "none";
+            }
+        </script>
+
+    </body>
+</html>
