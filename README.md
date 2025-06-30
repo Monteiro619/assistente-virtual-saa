@@ -1,198 +1,144 @@
-Claro! Aqui está um **passo a passo completo** para você documentar no GitHub (README ou qualquer tutorial) **como criar e publicar uma página com PDF + Assistente Virtual do Copilot (Power Virtual Agents)**, usando **GitHub Pages**:
+```
+# 🧠 Assistente Virtual da Subsecretaria de Assuntos Administrativos - SAA
+
+Este projeto integra um agente inteligente do **Microsoft Copilot Studio** com uma interface Web contendo a **Carta de Serviços da SAA em PDF**. O chatbot responde exclusivamente com base nas informações oficiais fornecidas.
 
 ---
 
-## 🛠️ **Passo a passo: Publicar Assistente Virtual + PDF via GitHub Pages**
+## ✅ ETAPA 1: Criar o Agente no Microsoft Copilot Studio
 
-### 🔹 1. Criar o bot no Copilot Studio (Microsoft)
+### 1. Acesse o Copilot Studio
+- Vá para: [https://copilotstudio.microsoft.com](https://copilotstudio.microsoft.com)
+- Faça login com sua conta institucional (gov.br, saúde.gov.br ou Microsoft 365).
 
-1. Acesse: [https://copilotstudio.microsoft.com](https://copilotstudio.microsoft.com)
-2. Crie um bot com nome e idioma desejado
-3. Vá em **Tópicos** e crie os fluxos com base em sua Carta de Serviços
-4. Nas respostas que devem abrir o PDF, adicione um link como:
+### 2. Crie um novo bot
+- Vá em **Copilots** ou **Meus Agentes**
+- Clique em **Criar**
+- Defina um nome: `Assistente Virtual SAA`
+- Idioma: `Português (Brasil)`
+- Confirme
+
+### 3. Adicione a base de conhecimento
+- No menu lateral, vá para: **Base de conhecimento → Adicionar fonte**
+- Faça o upload do arquivo PDF da **Carta de Serviços**
+- Ou adicione um link público do PDF (por exemplo, do GitHub Pages ou SharePoint)
+- Isso permite que o agente responda com base nesse conteúdo
+
+### 4. Configure o comportamento da IA
+- Vá em **Configurações > IA generativa**
+- Adicione um comportamento personalizado com o seguinte conteúdo:
 
 ```
-📄 [Clique aqui para visualizar o documento](#abrir-pdf)
+
+Use exclusivamente as fontes de conhecimento fornecidas para responder às perguntas.
+
+Sempre organize a resposta neste formato:
+
+Serviço:
+Macroprocesso:
+Unidade responsável:
+Contato:
+O que é?
+Quem pode solicitar?
+Como solicitar?
+Tempo médio de atendimento:
+
+Se a informação solicitada não estiver disponível, responda:
+“Desculpe, não encontrei essa informação na Carta de Serviços.”
+
+Evite qualquer conteúdo que não esteja presente nas fontes, não invente informações.
+
 ```
+
+### 5. Teste e publique o bot
+- Vá em **Testar seu copiloto** para validar as respostas
+- Depois, clique em **Publicar > Publicar agora**
+
+### 6. Obtenha o link do Webchat
+- Vá em **Canais > Aplicativo Web**
+- Ative o canal e copie o link gerado. Ele terá a seguinte estrutura:
+
+```
+
+[https://copilotstudio.microsoft.com/environments/SEU\_ID/bots/SEU\_ID/webchat?\_\_version\_\_=2](https://copilotstudio.microsoft.com/environments/SEU_ID/bots/SEU_ID/webchat?__version__=2)
+
+```
+
+Copie esse link para usar na interface da página.
 
 ---
 
-### 🔹 2. Ativar o canal "Website" e copiar o iframe
+## 🌐 ETAPA 2: Criar a Página Web no GitHub Pages
 
-1. No menu esquerdo do bot, clique em **"Canais"**
-2. Vá em **"Website"**
-3. Copie o código do tipo:
+### 1. Estrutura do repositório
 
-```html
-<iframe src="https://copilotstudio.microsoft.com/environments/Default-xxx/bots/xxx/webchat?__version__=2"></iframe>
+Crie um repositório no GitHub com o nome:
+
 ```
 
-⚠️ Copie apenas o link de `src`, pois usaremos no HTML.
+assistente-virtual-saa
+
+```
+
+Adicione os seguintes arquivos:
+
+```
+
+assistente-virtual-saa/
+├── index.html
+├── carta-servicos-saa.pdf.pdf
+└── README.md
+
+```
+
+### 2. Interface HTML
+
+O código que exibe o PDF e o botão flutuante do chatbot já está no arquivo `index.html`.
+
+Você só precisa:
+
+- Substituir o link do chatbot (`iframe src`) pelo link copiado do Copilot Studio.
+- Garantir que o nome do PDF (`carta-servicos-saa.pdf.pdf`) esteja idêntico ao nome no `src` do iframe.
+
+O layout foi construído com HTML, CSS e JavaScript puro e é responsivo.
+
+### 3. Publicar com GitHub Pages
+
+- Vá para o repositório no GitHub
+- Acesse **Settings > Pages**
+- Em **Build and Deployment**, selecione:
+  - **Branch**: `main` ou `principal`
+  - **Diretório**: `/ (root)`
+- Clique em **Salvar**
+
+O GitHub Pages irá gerar uma URL como esta:
+
+```
+
+[https://seuusuario.github.io/assistente-virtual-saa/](https://seuusuario.github.io/assistente-virtual-saa/)
+
+```
+
+Acesse o link para ver a página publicada.
 
 ---
 
-### 🔹 3. Criar estrutura de projeto
+## ✅ Resultado Final
 
-No GitHub, crie um repositório e envie estes arquivos para a **raiz** (sem subpastas):
-
-```
-📁 assistente-virtual-saa/
-├── index.html               ← Página principal
-└── carta-servicos-saa.pdf   ← Arquivo PDF
-```
+🔹 A página exibe automaticamente o PDF da Carta de Serviços  
+🔹 Um botão no canto inferior direito permite abrir o chatbot  
+🔹 O chatbot responde apenas com base no conteúdo da Carta de Serviços
 
 ---
 
-### 🔹 4. Código do `index.html`
+## 📎 Observações
 
-Substitua o `src` do iframe com o link do seu bot:
-
-```html
-<!DOCTYPE html>
-<html lang="pt-BR">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Assistente Virtual + PDF</title>
-  <style>
-    html, body {
-      margin: 0;
-      padding: 0;
-      font-family: 'Segoe UI', sans-serif;
-      height: 100%;
-    }
-
-    iframe#pdf-frame {
-      width: 100%;
-      height: 90vh;
-      display: none;
-      border: none;
-    }
-
-    #botao-chat {
-      position: fixed;
-      bottom: 20px;
-      right: 20px;
-      background: #0078D4;
-      color: white;
-      padding: 12px 18px;
-      border: none;
-      border-radius: 25px;
-      font-size: 14px;
-      cursor: pointer;
-      z-index: 1000;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.2);
-    }
-
-    #chatbox {
-      display: none;
-      position: fixed;
-      bottom: 80px;
-      right: 20px;
-      width: 400px;
-      height: 600px;
-      border-radius: 10px;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.2);
-      overflow: hidden;
-      z-index: 999;
-      border: 1px solid #ccc;
-    }
-
-    #chatbox-header {
-      background-color: #0b556a;
-      color: white;
-      padding: 12px;
-      font-weight: bold;
-      text-align: center;
-      position: relative;
-    }
-
-    #fechar-chat {
-      position: absolute;
-      top: 8px;
-      right: 12px;
-      background: transparent;
-      border: none;
-      color: white;
-      font-size: 18px;
-      cursor: pointer;
-    }
-
-    #chat-iframe {
-      width: 100%;
-      height: calc(100% - 48px);
-      border: none;
-    }
-  </style>
-</head>
-<body>
-
-  <!-- PDF -->
-  <iframe id="pdf-frame" src="carta-servicos-saa.pdf#toolbar=0"></iframe>
-
-  <!-- Chatbox -->
-  <div id="chatbox">
-    <div id="chatbox-header">
-      Assistente Virtual da Subsecretaria de Assuntos Administrativos - SAA
-      <button id="fechar-chat" onclick="fecharChat()">×</button>
-    </div>
-    <iframe
-      id="chat-iframe"
-      src="https://copilotstudio.microsoft.com/environments/Default-xxx/bots/xxx/webchat?__version__=2">
-    </iframe>
-  </div>
-
-  <button id="botao-chat" onclick="abrirChat()">💬 Assistente Virtual</button>
-
-  <script>
-    function abrirChat() {
-      document.getElementById("chatbox").style.display = "block";
-    }
-
-    function fecharChat() {
-      document.getElementById("chatbox").style.display = "none";
-    }
-
-    // Mostrar PDF se o link tiver o hash #abrir-pdf
-    window.addEventListener("hashchange", function () {
-      if (location.hash === "#abrir-pdf") {
-        const pdf = document.getElementById("pdf-frame");
-        pdf.style.display = "block";
-        pdf.scrollIntoView({ behavior: "smooth" });
-      }
-    });
-  </script>
-</body>
-</html>
-```
+- O chatbot **não interage diretamente com o PDF na página** – ele usa a **base carregada no Copilot Studio**.
+- O PDF na interface é apenas para visualização manual pelo usuário.
+- A interface está otimizada para funcionar bem em desktop e mobile.
 
 ---
 
-### 🔹 5. Ativar o GitHub Pages
-
-1. Vá no repositório
-2. Clique em **Settings > Pages**
-3. Em “Source”, escolha:
-
-   * Branch: `main` (ou `principal`)
-   * Folder: `/ (root)`
-4. Clique em **Salvar**
-
-O GitHub vai gerar um link como:
-
-```
-https://seuusuario.github.io/assistente-virtual-saa/
+Desenvolvido para facilitar o acesso a serviços administrativos do Ministério da Saúde.
 ```
 
----
-
-### ✅ Teste final
-
-1. Acesse o link do GitHub Pages
-2. Clique em 💬 Assistente Virtual
-3. Envie uma pergunta
-4. Quando o bot responder com link para `#abrir-pdf`, o PDF será exibido automaticamente.
-
----
-
-Se quiser, posso exportar esse passo a passo em `.md` para você colocar no README.md. Deseja?
