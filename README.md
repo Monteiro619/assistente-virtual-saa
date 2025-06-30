@@ -75,3 +75,59 @@ Este projeto integra a **Carta de Serviços da SAA** em PDF com um **chatbot int
 
 ### 2. Prepare os arquivos locais  
 Na sua máquina, crie uma pasta `assistente-virtual-saa` com:  
+
+```text
+assistente-virtual-saa/
+├── index.html
+├── carta-servicos-saa.pdf
+└── README.md
+
+```
+
+- `index.html` → código da interface (PDF + chatbot)  
+- `carta-servicos-saa.pdf` → a Carta de Serviços  
+- `README.md` → este guia
+
+### 3. Commit & Push para o GitHub  
+```bash
+cd assistente-virtual-saa
+git init
+git add .
+git commit -m "Inicial: interface PDF + chatbot"
+git branch -M main
+git remote add origin https://github.com/seuusuario/assistente-virtual-saa.git
+git push -u origin main
+```
+### 4. Confira a estrutura no GitHub
+No navegador, abra seu repositório e confirme que aparece:
+
+```text
+assistente-virtual-saa/
+├── 📄 carta-servicos-saa.pdf     
+├── 🌐 index.html                  
+└── 📘 README.md                 
+
+```
+
+### 5. Ative o GitHub Pages
+Vá em Settings > Pages
+
+Em Build and Deployment → Branch, escolha main
+
+Em Root, selecione / (root)
+
+Clique em Save
+
+Após alguns segundos você verá:
+Your site is published at https://seuusuario.github.io/assistente-virtual-saa/
+
+### 6. Acesse e teste
+Abra https://seuusuario.github.io/assistente-virtual-saa/
+
+O PDF da Carta de Serviços deve carregar em tela cheia
+
+Clique em 💬 Assistente Virtual para abrir o chatbot
+
+Faça perguntas e verifique que as respostas seguem o padrão da Carta
+
+Link do bot: https://monteiro619.github.io/assistente-virtual-saa/
